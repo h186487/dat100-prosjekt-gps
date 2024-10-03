@@ -5,12 +5,31 @@ import no.hvl.dat100ptc.TODO;
 public class GPSPoint {
 
 	// TODO - objektvariable
+	private int time;
+	private double latitude;
+	private double longitude;
+	private double elevation;
 	
 	public GPSPoint(int time, double latitude, double longitude, double elevation) {
 
 		// TODO - konstruktur
+		this.time= time;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.elevation = elevation;
+		
+//		throw new UnsupportedOperationException(TODO.construtor("GPSPoint"));
+		
+	}
+	
+	public static void main (String[] args) {
+		GPSPoint point = new GPSPoint(10, 5.5, 4.5, 12);
+		
+		System.out.println("Tid: " + point.time + " sekunder");
+		System.out.println("Høydegrad: " + point.latitude);
+		System.out.println("Lengdegrad: " + point.longitude);
+		System.out.println("Høyde: " + point.elevation + " meter");
 
-		throw new UnsupportedOperationException(TODO.construtor("GPSPoint"));
 		
 	}
 
