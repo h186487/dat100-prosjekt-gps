@@ -7,7 +7,7 @@ public class GPSData {
 
 	private GPSPoint[] gpspoints;
 	protected int antall = 0;
-
+ 
 	public GPSData(int antall) {
 
 		throw new UnsupportedOperationException(TODO.method());

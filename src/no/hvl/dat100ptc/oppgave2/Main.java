@@ -7,7 +7,9 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-		// TODO
+		//a
+		GPSPoint gpsPoint = GPSPointConverter.convert("2017-08-13T08:52:26.000Z","60.385390","5.217217","61.9");
 		
+		System.out.println(gpsPoint);
 	}
 }
