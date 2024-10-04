@@ -74,13 +74,6 @@ public class GPSPoint {
 	
 	public String toString() {
 		
-<<<<<<< Updated upstream
-		String str;  
-		
-		str = time + " (" + latitude + "," + longitude + ") " + elevation + "\n";
- 
-		return str;
-=======
 		String str = time + " (" + latitude + "," + longitude + ") " + elevation + "\n";
 		
 		return str;
@@ -88,7 +81,7 @@ public class GPSPoint {
 //		throw new UnsupportedOperationException(TODO.method());
 
 		// TODO
->>>>>>> Stashed changes
+
 		
 	}
 }
