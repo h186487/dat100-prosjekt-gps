@@ -6,17 +6,17 @@ public class Main {
 		
 		GPSPoint point = new GPSPoint(0, 0, 0, 0);
 		
-        point.setTime(20);
-        point.setLatitude(60.385390);
-        point.setLongitude(5.332200);
-        point.setElevation(75.0);
+        point.setTime(1);
+        point.setLatitude(2);
+        point.setLongitude(3);
+        point.setElevation(5);
 		
 		System.out.println("Tid: " + point.getTime() + " sekunder");
 		System.out.println("Høydegrad: " + point.getLatitude());
 		System.out.println("Lengdegrad: " + point.getLongitude());
 		System.out.println("Høyde: " + point.getElevation() + " meter");
 		
-		
+		System.out.println(point.toString());
 	}
 
 }
