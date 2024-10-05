@@ -158,11 +158,11 @@ public class GPSComputer {
 
 		System.out.println("==============================================");
 		System.out.printf("Total Time     :   %s%n", GPSUtils.formatTime(totalTime()));
-		System.out.printf("Total distance :      %.2f km%n", totalDistance());
-		System.out.printf("Total elevation:     %.2f m%n", totalElevation());
-		System.out.printf("Max speed      :      %.2f km/t%n", maxSpeed());
-		System.out.printf("Average speed  :      %.2f km/t%n", averageSpeed());
-		System.out.printf("Energy         :     %.2f kcal%n", totalEnergyKcal);
+		System.out.printf("Total distance :      %s km%n", GPSUtils.formatDouble(totalDistance() / 1000.0));
+		System.out.printf("Total elevation:     %s m%n", GPSUtils.formatDouble(totalElevation()));
+		System.out.printf("Max speed      :      %s km/t%n", GPSUtils.formatDouble(maxSpeed()));
+		System.out.printf("Average speed  :      %s km/t%n", GPSUtils.formatDouble(averageSpeed()));
+		System.out.printf("Energy         :     %s kcal%n", GPSUtils.formatDouble(totalEnergyKcal));
 		System.out.println("==============================================");
 		
 	}
