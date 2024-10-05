@@ -67,10 +67,10 @@ public class GPSUtils {
 		double d;
 		double latitude1, longitude1, latitude2, longitude2;
 //		definer variabler og omregn til radianer
-		latitude1 = Math.toRadians(gpspoint1.getLatitude());
-		latitude2 = Math.toRadians(gpspoint2.getLatitude());
-		longitude1 = Math.toRadians(gpspoint1.getLongitude());
-		longitude2 = Math.toRadians(gpspoint2.getLongitude());
+		latitude1 = toRadians(gpspoint1.getLatitude());
+		latitude2 = toRadians(gpspoint2.getLatitude());
+		longitude1 = toRadians(gpspoint1.getLongitude());
+		longitude2 = toRadians(gpspoint2.getLongitude());
 
 		double deltaphi = latitude2 - latitude1;
 		double deltadelta = longitude2 - longitude1;
@@ -84,17 +84,17 @@ public class GPSUtils {
 	
 	private static double compute_a(double phi1, double phi2, double deltaphi, double deltadelta) {
 //		definer variabler f og g som inneholder del av mattestykket som skal opphøyes i 2
-		double f = (Math.sin(deltaphi / 2));
-		double g = (Math.sin(deltadelta / 2));
+		double f = (sin(deltaphi / 2));
+		double g = (sin(deltadelta / 2));
 		
-		double a = Math.pow(f, 2) + Math.cos(phi1) * Math.cos(phi2) * Math.pow(g, 2);
+		double a = pow(f, 2) + cos(phi1) * cos(phi2) * pow(g, 2);
 		return a;
 
 	}
 
 	private static double compute_c(double a) {
 
-		double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		double c = 2 * atan2(sqrt(a), sqrt(1 - a));
 		return c;
 
 	}
@@ -136,13 +136,16 @@ public class GPSUtils {
 	private static int TEXTWIDTH = 10;
 
 	public static String formatDouble(double d) {
+//		definer string til å omgjøre til to desimaler for double d
+		String str = String.format("%.2f", d);
+//		bestemmer antall mellomrom til å være 10 - lengden på strengen
+		int antallMellomrom = TEXTWIDTH - str.length();
+//		går gjennom antall mellomrom og lager mellomrom for hvert antall mellomrom
+		for (int i = 0; i < antallMellomrom; i++) {
+			str = " " + str;
+		}
 
-		String str;
+		return str;
 
-		
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO
-		
 	}
 }
