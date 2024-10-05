@@ -31,45 +31,60 @@ public class GPSComputer {
 
 		double distance = 0;
 
-		throw new UnsupportedOperationException(TODO.method());
-
-		// TODO
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+			distance += GPSUtils.distance(gpspoints[i], gpspoints[i + 1]);
+		}
+		return distance;
 
 	}
 
 	public double totalElevation() {
 
 		double elevation = 0;
-
-		throw new UnsupportedOperationException(TODO.method());
-		
-		// TODO 
+//		gå gjennom tabellen med gps punkter
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+//			lagre høyden fra nåværende og neste gps punkt
+			double elevationNå = gpspoints[i].getElevation();
+			double elevationNeste = gpspoints[i + 1].getElevation();
+//			kalkulerer høyde hvis neste punkt er høyere
+			if (elevationNeste > elevationNå) {
+				elevation += (elevationNeste - elevationNå);
+			}
+		}
+		return elevation;
 		
 	}
 
 	public int totalTime() {
-
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+//		lagrer tid fra første og siste gps punkt
+		int startTime = gpspoints[0].getTime();
+		int sluttTime = gpspoints[gpspoints.length - 1].getTime();
+//		returnerer total tid
+		return sluttTime - startTime;
 		
 	}
 		
-
 	public double[] speeds() {
 
-		double[] speeds = new double[gpspoints.length-1];
+		double[] speeds = new double[gpspoints.length - 1];
 		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
-		
+//		gå gjennom tabellen med gps punkter
+		for (int i = 0; i < gpspoints.length - 1; i++) {
+//			kalkuler og lagre gjennomsnittsfart gjennom punkt i og i + 1
+			speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+		}
+		return speeds;
 	}
 	
 	public double maxSpeed() {
 		
 		double maxspeed = 0;
 		
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		double[] speedArray = speeds();
+		
+		maxspeed = GPSUtils.findMax(speedArray);
+		
+		return maxspeed;
 	
 	}
 
@@ -77,9 +92,10 @@ public class GPSComputer {
 
 		double average = 0;
 		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		average = totalDistance() / totalTime();
 		
+		return average;
+			
 	}
 
 
@@ -87,32 +103,67 @@ public class GPSComputer {
 	public static final double MS = 2.23;
 
 	public double kcal(double weight, int secs, double speed) {
-
-		double kcal;
-
-		double met = 0;		
+		
 		double speedmph = speed * MS;
-
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		
+		double met = 0;	
+		
+		double t = secs / 3600.0;
+		
+		double metArray[][] = {
+				{10, 4},
+				{12, 6},
+				{14, 8},
+				{16, 10},
+				{20, 12},
+				{Double.MAX_VALUE, 16}
+		};
+		
+		for (int i = 0; i < metArray.length; i++) {
+			if (speedmph < metArray[i][0]) {
+				met = metArray[i][1];
+				break;
+			}
+		}
+		
+//		double kcal = met * weight * t;
+		
+		return met * weight * t;
 		
 	}
 
 	public double totalKcal(double weight) {
-
+		
 		double totalkcal = 0;
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		for (int i = 1; i < gpspoints.length; i++) {
+			double speed = GPSUtils.speed(gpspoints[i - 1], gpspoints[i]);
+			
+			int secs = gpspoints[i].getTime() - gpspoints[i - 1].getTime();
+			
+			double kcalsegment = kcal(weight, secs, speed);
+			
+			totalkcal += kcalsegment;
+		}
+		return totalkcal;
 		
 	}
 	
 	private static double WEIGHT = 80.0;
 	
 	public void displayStatistics() {
+		
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		double totalEnergyKcal = totalKcal(WEIGHT);
+
+		System.out.println("==============================================");
+		System.out.printf("Total Time     :   %s%n", GPSUtils.formatTime(totalTime()));
+		System.out.printf("Total distance :      %.2f km%n", totalDistance());
+		System.out.printf("Total elevation:     %.2f m%n", totalElevation());
+		System.out.printf("Max speed      :      %.2f km/t%n", maxSpeed());
+		System.out.printf("Average speed  :      %.2f km/t%n", averageSpeed());
+		System.out.printf("Energy         :     %.2f kcal%n", totalEnergyKcal);
+		System.out.println("==============================================");
 		
 	}
 
