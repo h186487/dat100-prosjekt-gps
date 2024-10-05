@@ -10,34 +10,34 @@ public class GPSData {
  
 	public GPSData(int antall) {
 
-		this.gpspoints = new GPSPoint[antall];
-		this.antall = 0;
+		this.gpspoints = new GPSPoint[antall];  //starter tabellen med en gitt størrelse
+		this.antall = 0; 						//setter antall til 0
 		
 	}
 
 	public GPSPoint[] getGPSPoints() {
-		return this.gpspoints;
+		return this.gpspoints;					//henter referansen til gpspoint-tabellen
 	}
 	
 	protected boolean insertGPS(GPSPoint gpspoint) {
 
 		boolean inserted = false;
 		
-		if (antall < gpspoints.length) {
-			gpspoints[antall] = gpspoint;
-			antall++;
-			inserted = true;
+		if (antall < gpspoints.length) {		//sjekker om det er plass
+			gpspoints[antall] = gpspoint;		//legger til gpspoints
+			antall++;							//øker antall
+			inserted = true;					//intsetting velykket
 		}
-		return inserted;
+		return inserted;						//returnerer insettingsstatus
 	
 	}
 
 	public boolean insert(String time, String latitude, String longitude, String elevation) {
 
-		GPSPoint gpspoint;
+		GPSPoint gpspoint; //deklarerer objektet
 
-		gpspoint = GPSDataConverter.convert(time, latitude, longitude, elevation);
-		return insertGPS(gpspoint);
+		gpspoint = GPSDataConverter.convert(time, latitude, longitude, elevation); //konverterer
+		return insertGPS(gpspoint);  //setter inn gpspoint i tabellen
 		
 	}
 
