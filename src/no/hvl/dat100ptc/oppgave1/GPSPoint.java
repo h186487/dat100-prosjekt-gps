@@ -15,7 +15,7 @@ public class GPSPoint {
 		// TODO - konstruktur
 		this.time= time;
 	 	this.latitude = latitude;
-		this.longitude = longitude;
+	 	this.longitude = longitude;
 		this.elevation = elevation;
 		
 //		throw new UnsupportedOperationException(TODO.construtor("GPSPoint"));

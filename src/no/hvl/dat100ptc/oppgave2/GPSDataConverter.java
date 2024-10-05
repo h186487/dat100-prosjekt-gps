@@ -29,13 +29,13 @@ public class GPSDataConverter {
 
 		GPSPoint gpspoint;
 		//konvertere tid til sekunder
-		int timeInSecounds = toSeconds(timeStr);
-		//konvertere de andre parameterne tilde riktige typene
+		int time = toSeconds(timeStr);
+		//konvertere de andre parameterne til de riktige typene
 		double latitude = Double.parseDouble(latitudeStr);
 		double longitude = Double.parseDouble(longitudeStr);
 		double elevation = Double.parseDouble(elevationStr);
 
-		gpspoint = new GPSPoint(timeInSecounds, latitude, longitude, elevation);
+		gpspoint = new GPSPoint(time, latitude, longitude, elevation);
 		
 		return gpspoint;
 		

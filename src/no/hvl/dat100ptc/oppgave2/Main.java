@@ -7,9 +7,14 @@ public class Main {
 	
 	public static void main(String[] args) {
 
-		//a
-		GPSPoint gpsPoint = GPSDataConverter.convert("2017-08-13T08:52:26.000Z","60.385390","5.217217","61.9");
+		GPSPoint gpsPoint1 = new GPSPoint(1, 1.1, 2.2, 3.3);
+		GPSPoint gpsPoint2 = new GPSPoint(2, 4.4, 5.5, 6.6);
 		
-		System.out.println(gpsPoint);
+		GPSData gpsData = new GPSData(2);
+		
+		gpsData.insertGPS(gpsPoint1);
+		gpsData.insertGPS(gpsPoint2);
+		
+		gpsData.print();
 	}
 }
