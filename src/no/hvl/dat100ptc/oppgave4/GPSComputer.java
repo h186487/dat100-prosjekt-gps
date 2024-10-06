@@ -72,6 +72,7 @@ public class GPSComputer {
 		for (int i = 0; i < gpspoints.length - 1; i++) {
 //			kalkuler og lagre gjennomsnittsfart gjennom punkt i og i + 1
 			speeds[i] = GPSUtils.speed(gpspoints[i], gpspoints[i + 1]);
+//			System.out.println(speeds[i]);
 		}
 		return speeds;
 	}
@@ -81,6 +82,7 @@ public class GPSComputer {
 		double maxspeed = 0;
 		
 		double[] speedArray = speeds();
+//		System.out.println("speed array: " + Arrays.toString);
 		
 		maxspeed = GPSUtils.findMax(speedArray);
 		
@@ -157,12 +159,12 @@ public class GPSComputer {
 		double totalEnergyKcal = totalKcal(WEIGHT);
 
 		System.out.println("==============================================");
-		System.out.printf("Total Time     :   %s%n", GPSUtils.formatTime(totalTime()));
-		System.out.printf("Total distance :      %s km%n", GPSUtils.formatDouble(totalDistance() / 1000.0));
-		System.out.printf("Total elevation:     %s m%n", GPSUtils.formatDouble(totalElevation()));
-		System.out.printf("Max speed      :      %s km/t%n", GPSUtils.formatDouble(maxSpeed()));
-		System.out.printf("Average speed  :      %s km/t%n", GPSUtils.formatDouble(averageSpeed()));
-		System.out.printf("Energy         :     %s kcal%n", GPSUtils.formatDouble(totalEnergyKcal));
+		System.out.printf("Total Time     : %s%n", GPSUtils.formatTime(totalTime()));
+		System.out.printf("Total distance : %s km%n", GPSUtils.formatDouble(totalDistance() / 1000.0));
+		System.out.printf("Total elevation: %s m%n", GPSUtils.formatDouble(totalElevation()));
+		System.out.printf("Max speed      : %s km/t%n", GPSUtils.formatDouble(maxSpeed() * 3.6));
+		System.out.printf("Average speed  : %s km/t%n", GPSUtils.formatDouble(averageSpeed() * 3.6));
+		System.out.printf("Energy         : %s kcal%n", GPSUtils.formatDouble(totalEnergyKcal));
 		System.out.println("==============================================");
 		
 	}
