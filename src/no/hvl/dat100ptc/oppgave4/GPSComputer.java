@@ -15,7 +15,7 @@ public class GPSComputer {
 	public GPSComputer(String filename) {
 
 		GPSData gpsdata = GPSDataFileReader.readGPSFile(filename);
-		gpspoints = gpsdata.getGPSPoints();
+	 	gpspoints = gpsdata.getGPSPoints();
 
 	}
 
@@ -60,7 +60,7 @@ public class GPSComputer {
 		int startTime = gpspoints[0].getTime();
 		int sluttTime = gpspoints[gpspoints.length - 1].getTime();
 //		returnerer total tid
-		return sluttTime - startTime;
+ 		return sluttTime - startTime;
 		
 	}
 		

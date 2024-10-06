@@ -21,10 +21,10 @@ public class ShowProfile extends EasyGraphics {
 
 	public ShowProfile() {
 
-		String filename = JOptionPane.showInputDialog("GPS data filnavn (uten .csv): ");
+		String filename = JOptionPane.showInputDialog("GPS data filnavn (uten .csv): "); //eks. skriv medium
 		GPSComputer gpscomputer =  new GPSComputer(filename);
 
-		gpspoints = gpscomputer.getGPSPoints();
+	 	gpspoints = gpscomputer.getGPSPoints();
 		
 	}
 
@@ -47,10 +47,21 @@ public class ShowProfile extends EasyGraphics {
 		int x = MARGIN; // første høyde skal tegnes ved MARGIN
 		int y;
 		
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		for(int i = 0; i < gpspoints.length; i++) {
+			int height = (int) Math.max(0, gpspoints[i].getElevation()); //ikke ta med negative høyder
+				
+			y = ybase - height; //beregner y-posisjon basert på høyden
 		
-
+			//tegne linjen for høydepprofilen
+			if (i < 0) {
+				int previousHeight = (int) Math.max(0, gpspoints[i - 1].getElevation());
+				int previousY = ybase - previousHeight;
+				drawLine(x -1, previousY, x - 1, y); //tegn fra forjrrige til høyde nå
+			}
+			//tegn linjen for høyden np
+			drawLine(x, ybase, x, y); //tegne høydebar
+			x++; //flytter til neste x-posisjon
+		}
 	}
 
 }
