@@ -13,7 +13,7 @@ public class ShowRoute extends EasyGraphics {
 
 	private static int MARGIN = 50;
 	private static int MAPXSIZE = 800;
-	private static int MAPYSIZE = 800;
+ 	private static int MAPYSIZE = 800;
 
 	private GPSPoint[] gpspoints;
 	private GPSComputer gpscomputer;
@@ -64,9 +64,17 @@ public class ShowRoute extends EasyGraphics {
 
 	public void showRouteMap(int ybase) {
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
+		for(GPSPoint point : gpspoints) {
+			double longitude = point.getLongitude();
+			double latitude = point.getLatitude();
+			
+			int x = (int)((longitude - minlon) * xstep);
+			int y = ybase - (int)((latitude - minlat) * ystep);
+			
+			setColor(255, 0, 0); 
+			fillCircle(x, y, 5);
 		
+		}
 	}
 
 	public void showStatistics() {
@@ -76,16 +84,37 @@ public class ShowRoute extends EasyGraphics {
 		setColor(0,0,0);
 		setFont("Courier",12);
 		
-		// TODO
-		throw new UnsupportedOperationException(TODO.method());
+		double totalTime = gpscomputer.totalTime();
+		double totalDistance = gpscomputer.totalDistance();
+		double totalElevation = gpscomputer.totalElevation();
+		double maxSpeed = gpscomputer.maxSpeed();
+		double averageSpeed = gpscomputer.averageSpeed();
+		double energy = gpscomputer.totalKcal(80); //80kg
+		
+		drawString("Total time: " + String.format("%.2f", totalTime) + " timer", 10, TEXTDISTANCE);
+		drawString("Total distance: " + String.format("%.2f", totalDistance) + " km", 10, TEXTDISTANCE + 20);
+		drawString("Total elevation: " + String.format("%.2f", totalElevation) + " m", 10, TEXTDISTANCE + 40);
+		drawString("Max speed: " + String.format("%.2f", maxSpeed) + " km/t", 10, TEXTDISTANCE + 60);
+		drawString("Average speed: " + String.format("%.2f", averageSpeed) + " km/t", 10, TEXTDISTANCE + 80);
+		drawString("Energy: " + String.format("%.2f", energy)+ " kcal", 10, TEXTDISTANCE + 100);
+		
 		
 	}
 
 	public void replayRoute(int ybase) {
 
-		// TODO 
-		throw new UnsupportedOperationException(TODO.method());
-		
+		for(GPSPoint point : gpspoints) {
+			double latitude = point.getLatitude();
+			double longitude = point.getLongitude();
+			
+			int x = (int)((longitude - minlon) * xstep);
+			int y = ybase - (int)((latitude - minlat) * ystep); 
+			
+			setColor(0, 0, 255);
+			moveCircle(x, y, 10); //flytt sirkelen til kooridnatene
+			setSpeed(10);
+			pause(100); //vent før neste bevegelse
+		}
 	}
 
 }
