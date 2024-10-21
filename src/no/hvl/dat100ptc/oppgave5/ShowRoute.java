@@ -111,7 +111,8 @@ public class ShowRoute extends EasyGraphics {
 			int y = ybase - (int)((latitude - minlat) * ystep); 
 			
 			setColor(0, 0, 255);
-			moveCircle(x, y, 10); //flytt sirkelen til kooridnatene
+			moveCircle(x, y, 10); //flytt sirkelen til kooridnatene  
+			//moveCircle er feil, første parameter er sirkel, også x og y
 			setSpeed(10);
 			pause(100); //vent før neste bevegelse
 		}
