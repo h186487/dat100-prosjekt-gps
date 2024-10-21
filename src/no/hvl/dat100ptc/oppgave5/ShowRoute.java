@@ -63,16 +63,29 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void showRouteMap(int ybase) {
+		setColor(0, 255, 0); 
+		
+		int x = 0;
+		int y = 0;
+		
+		int [] lastPoint = null;
 
 		for(GPSPoint point : gpspoints) {
 			double longitude = point.getLongitude();
 			double latitude = point.getLatitude();
 			
-			int x = (int)((longitude - minlon) * xstep);
-			int y = ybase - (int)((latitude - minlat) * ystep);
+			x = (int)(Math.abs(longitude - minlon) * xstep);
+			y = (int)(Math.abs(latitude - minlat) * ystep);
 			
-			setColor(255, 0, 0); 
-			fillCircle(x, y, 5);
+			if (lastPoint != null) {
+				drawLine(lastPoint[0], ybase - lastPoint[1], x, ybase - y);
+			}
+			
+			lastPoint = new int [2];
+			lastPoint[0]= x;
+			lastPoint[1] = y;
+			
+			fillCircle(x, ybase - y, 5);
 		
 		}
 	}
@@ -102,19 +115,21 @@ public class ShowRoute extends EasyGraphics {
 	}
 
 	public void replayRoute(int ybase) {
-
+		setColor(0, 0, 255);
+		int x = (int)(Math.abs(gpspoints[0].getLongitude() - minlon) * xstep);
+		int y = (int)(Math.abs(gpspoints[0].getLatitude() - minlat) * ystep); 
+		
+		int circle = fillCircle(x, ybase - y, 8);
+		
+		setSpeed(5);
 		for(GPSPoint point : gpspoints) {
-			double latitude = point.getLatitude();
 			double longitude = point.getLongitude();
+			double latitude = point.getLatitude();
 			
-			int x = (int)((longitude - minlon) * xstep);
-			int y = ybase - (int)((latitude - minlat) * ystep); 
+			x = (int)(Math.abs(longitude - minlon) * xstep);
+			y = (int)(Math.abs(latitude - minlat) * ystep);
 			
-			setColor(0, 0, 255);
-			moveCircle(x, y, 10); //flytt sirkelen til kooridnatene  
-			//moveCircle er feil, første parameter er sirkel, også x og y
-			setSpeed(10);
-			pause(100); //vent før neste bevegelse
+			moveCircle(circle, x, ybase - y);
 		}
 	}
 
